@@ -1,9 +1,13 @@
 <div>
-    <h1>Header</h1>
+    <h3>V. Fedorenko</h3>
 </div>
 
 <style>
     div {
-        background-color: #f0f0f0;
+        border-bottom: 1px solid #ccc;
+    }
+
+    h3 {
+        margin: .5rem 0;
     }
 </style>

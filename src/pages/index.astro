@@ -1,29 +1,30 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.svelte";
+import Card from "../components/Card.svelte";
 
 const posts = await getCollection("posts");
 ---
 
 <Layout title="Keystatic & Astro's Content Collections">
   <div>
-    <h1>Keystatic ⚡️ + Astro 🚀</h1>
-    <p>
-      This homepage shows how to load data from Astro's content collections.
-    </p>
-    <p>
-      <a href="/keystatic">Click here to visit the Admin UI</a>, or the link
-      below to view a post in the collection.
-    </p>
+    <Hero />
     <h2>Posts</h2>
-    <ul>
+    <div>
       {
         posts.map((post) => (
-          <li>
-            <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-          </li>
+          <Card title={post.data.title} slug={`/posts/${post.slug}`} />
         ))
       }
-    </ul>
+    </div>
   </div>
 </Layout>
+
+<style>
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+</style>

@@ -1,0 +1,141 @@
+---
+title: Naming System Guide
+tags:
+  - Design System
+  - Naming
+---
+A well-structured and consistent naming system is crucial for maintaining clarity in a design system. It ensures that components, variants, and styles are easy to understand, scalable, and accessible for everyone involved in the design process.
+
+---
+
+## 1. Naming Conventions for Components
+
+### **Component Structure**
+
+- **Use Descriptive and Hierarchical Names**: Break down component names into logical segments that describe the element, its purpose, and state.
+  - Example: `Button/Primary/Default`
+  - Example: `Card/Product/WithImage`
+
+### **Naming Pattern**:
+
+- **Component Type**: What is the element? (e.g., Button, Card, Icon)
+- **Purpose/Variant**: What does this component represent? (e.g., Primary, Secondary, Tertiary)
+- **State/Modifier**: Any specific state or variant (e.g., Default, Hover, Active, Disabled)
+
+#### **Example: Button Component**
+
+- `Button/Primary/Default`: Primary button in its default state.
+- `Button/Primary/Hover`: Primary button in its hover state.
+- `Button/Secondary/Disabled`: Secondary button in its disabled state.
+
+#### **Example: Card Component**
+
+- `Card/Product/Default`: A product card in its default state.
+- `Card/Product/WithImage`: A product card with an image.
+- `Card/Profile/WithActions`: A profile card with action buttons.
+
+---
+
+## 2. Naming Conventions for Variants
+
+### **Organize Variants Logically**
+
+- Use **Variants** in Figma to capture different states or options for components (e.g., button size, color, state).
+- **Use Clear, Descriptive Variant Properties**: Define properties such as size, color, and state.
+
+#### **Example: Button Variants**
+
+For a button with size, color, and state as properties:
+
+- Property 1: **Size** (`Small`, `Medium`, `Large`)
+- Property 2: **Color** (`Primary`, `Secondary`, `Tertiary`)
+- Property 3: **State** (`Default`, `Hover`, `Pressed`, `Disabled`)
+
+Resulting variants:
+
+- `Button/Primary/Small/Default`
+- `Button/Primary/Small/Hover`
+- `Button/Secondary/Large/Disabled`
+
+### **Use Short, Predictable Values for Variants**:
+
+- Stick to concise values to keep naming manageable:
+  - `Small`, `Medium`, `Large` for size.
+  - `Default`, `Hover`, `Active`, `Disabled` for states.
+
+---
+
+## 3. Naming Conventions for Styles
+
+### **Define Global Styles Clearly**
+
+For reusable styles such as color, typography, and spacing, create a system that reflects their purpose and use across the design.
+
+#### **Example: Color Naming**
+
+- Use a **functional naming** system for color styles that reflect usage rather than specific hues.
+- **Example Format**: `Color/<Category>/<Usage>`
+  - `Color/Primary/Base`: The base primary color.
+  - `Color/Primary/Light`: Lighter shade of the primary color.
+  - `Color/Secondary/Base`: The base secondary color.
+  - `Color/Neutral/Background`: Neutral background color.
+
+#### **Example: Typography Naming**
+
+- **Example Format**: `Typography/<Use Case>/<Size>`
+  - `Typography/Heading/Large`: Large heading typography.
+  - `Typography/Body/Small`: Small body text.
+
+### **Spacing and Grid Styles**
+
+- **Example Format**: `Spacing/<Size>`
+  - `Spacing/Small`: Small spacing (e.g., `8px`).
+  - `Spacing/Large`: Large spacing (e.g., `32px`).
+
+---
+
+## 4. Best Practices for Naming
+
+### **Keep It Scalable**
+
+- Ensure the system can handle future changes without becoming confusing. Plan for new components, variants, and states.
+
+### **Use Consistent Terminology**
+
+- Stick to the same terminology across components and styles (e.g., `Primary`, `Secondary`, `Small`, `Large`). Avoid synonyms or overly specific names.
+
+### **Avoid Overly Long Names**
+
+- Names should be clear but concise. Avoid making the name too long by describing every detail, as this can lead to clutter and confusion.
+
+### **Test with Your Team**
+
+- Ensure the naming system is intuitive for all team members, including designers and developers. Get feedback and iterate on the naming system if necessary.
+
+---
+
+## 5. Example Naming System
+
+### Buttons
+
+- `Button/Primary/Small/Default`
+- `Button/Secondary/Large/Disabled`
+
+### Cards
+
+- `Card/Product/WithImage`
+- `Card/Profile/WithActions`
+
+### Colors
+
+- `Color/Primary/Base`
+- `Color/Neutral/Background`
+
+### Typography
+
+- `Typography/Heading/Large`
+- `Typography/Body/Small`
+
+---
+
+A consistent and scalable naming system makes it easier to collaborate, maintain your design system, and build components that are reusable and intuitive for your team.

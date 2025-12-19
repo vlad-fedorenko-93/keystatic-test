@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Tag from "../../components/Tag.svelte";
 
 const { slug } = Astro.params;
 if (!slug) throw new Error("Slug not found");
@@ -17,9 +18,19 @@ export async function getStaticPaths() {
 ---
 
 <Layout title={post.data.title}>
-  <a href="">Back to home</a>
+  <a href="/">Back to home</a>
   <h1>{post.data.title}</h1>
   <h2>Hello</h2>
-  <ul>{post.data.tags}</ul>
+  <div>{
+    post.data.tags?.map((tag) => <Tag tag={tag} />)
+  }</div>
   <Content />
 </Layout>
+
+<style>
+    div {
+        display: flex;
+        gap: .5rem;
+    }
+</style>
+
