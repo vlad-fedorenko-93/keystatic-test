@@ -6,5 +6,6 @@ import svelte from '@astrojs/svelte';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://vlad-fedorenko-93.github.io',
   integrations: [react(), markdoc(), keystatic(), svelte()],
 });
