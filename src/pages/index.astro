@@ -12,7 +12,7 @@ const posts = await getCollection('posts');
       This homepage shows how to load data from Astro's content collections.
     </p>
     <p>
-      <a href="/keystatic">Click here to visit the Admin UI</a>, or the link
+      <a href="/keystatic-test/keystatic">Click here to visit the Admin UI</a>, or the link
       below to view a post in the collection.
     </p>
     <h2>Posts</h2>
@@ -20,7 +20,7 @@ const posts = await getCollection('posts');
       {
         posts.map(post => (
           <li>
-            <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+            <a href={`/keystatic-test/posts/${post.slug}`}>{post.data.title}</a>
           </li>
         ))
       }

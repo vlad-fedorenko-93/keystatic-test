@@ -8,5 +8,6 @@ import svelte from '@astrojs/svelte';
 export default defineConfig({
   output: 'static',
   site: 'https://vlad-fedorenko-93.github.io',
+  base: '/keystatic-test',
   integrations: [react(), markdoc(), keystatic(), svelte()],
 });
