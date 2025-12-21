@@ -51,8 +51,8 @@ const { Content } = await post.render();
     <Content />
   </section>
   <section class="m-auto p-40 w-3/4 grid grid-cols-2 gap-4">
-    <Button label={"Previous post"} title={prevPost.data.title} slug={prevPost.slug}/>
-    <Button label={"Next post"} title={nextPost.data.title} slug={nextPost.slug}/>
+    <Button label={"Previous post"} title={prevPost.data.title} slug={`/posts/${prevPost.slug}`}/>
+    <Button label={"Next post"} title={nextPost.data.title} slug={`/posts/${nextPost.slug}`}/>
   </section>
 </Layout>
 
