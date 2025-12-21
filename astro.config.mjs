@@ -10,7 +10,6 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   output: 'static',
   site: 'https://vlad-fedorenko-93.github.io',
-  base: 'vlad-fedorenko-93.github.io',
   integrations: [react(), markdoc(), svelte(), process.env.NODE_ENV !== 'production' ? keystatic() : []].flat(),
   vite: {
     plugins: [tailwindcss()],
