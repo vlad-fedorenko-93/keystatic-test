@@ -1,6 +1,8 @@
 // @ts-ignore
 import { defineCollection, z } from 'astro:content';
 
+
+// Define Collection
 const posts = defineCollection({
   // Type-check frontmatter using a schema
   schema: z.object({
@@ -9,4 +11,5 @@ const posts = defineCollection({
   }),
 });
 
+// Export Collections
 export const collections = { posts };

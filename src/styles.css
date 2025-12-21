@@ -1,28 +1,46 @@
-html {
-  max-width: 80vw;
-  margin: auto;
-  line-height: 1.75;
-  font-size: 1.25rem;
-  font-family: sans-serif;
+@import "tailwindcss";
+
+
+article h1 {
+   font-size: 4rem;
+   margin: 2rem 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 1rem 0 1rem;
+article h2 {
+   font-size: 3rem;
+   line-height: 1.1;
+   margin: 2rem 0;
 }
 
-p,
-ul,
-ol {
-  margin-bottom: 1rem;
-  color: #1d1d1d;
+article h3 {
+   font-size: 2.2rem;
+   line-height: 1.1;
+   margin: 2rem 0;
 }
 
-img {
-  height: auto;
-  max-width: 100%;
+article h4 {
+   font-size: 1.7rem;
+   line-height: 1.1;
+   margin: 2rem 0;
+}
+
+article p, li {
+   font-size: 1.5rem;
+   line-height: 1.5;
+}
+
+article a {
+   text-decoration: underline;
+}
+
+article code {
+   background-color: #e6e4e4;
+   padding: 0.2rem 0.4rem;
+   font-size: 1rem;
+   border-radius: 6px;
+}
+
+article hr {
+   margin: 3rem 0;
+   border: 1px solid #e6e4e4;
 }

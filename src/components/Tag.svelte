@@ -2,13 +2,4 @@
     let { tag } = $props();
 </script>
 
-<div>{tag}</div>
-
-<style>
-    div{
-        padding: .25rem .8rem;
-        background-color: #ccc;
-        border-radius: 1000px;
-        font-size: .8rem;
-    }
-</style>
+<div class="px-3 py-1 text-sm rounded-full bg-slate-200">{tag}</div>

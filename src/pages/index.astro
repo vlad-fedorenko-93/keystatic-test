@@ -5,26 +5,32 @@ import Hero from "../components/Hero.svelte";
 import Card from "../components/Card.svelte";
 
 const posts = await getCollection("posts");
+const postPreview = posts.slice(-3);
 ---
 
 <Layout title="Keystatic & Astro's Content Collections">
-  <div>
-    <Hero />
-    <h2>Posts</h2>
-    <div>
+  <Hero />
+
+  <!-- Posts -->
+  <section class="m-auto w-3/4 py-40">
+    <h2 class="mb-4 text-4xl font-bold">Latest posts</h2>
+    <div class="grid grid-cols-4 gap-4">
       {
-        posts.map((post) => (
+        postPreview.map((post) => (
           <Card title={post.data.title} slug={`/posts/${post.slug}`} />
         ))
       }
     </div>
-  </div>
-</Layout>
+  </section>
 
-<style>
-    div {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-</style>
+  <!-- Portfolio -->
+  <section class="m-auto w-3/4 py-40">
+    <h2 class="mb-4 text-4xl font-bold">Portfolio</h2>
+    <div class="grid grid-cols-4 gap-4">
+      <Card title="Case Study 1" slug={`/portfolio/1`} />
+      <Card title="Case Study 2" slug={`/portfolio/2`} />
+      <Card title="Case Study 3" slug={`/portfolio/3`} />
+      <Card title="Case Study 4" slug={`/portfolio/4`} />
+    </div>
+  </section>
+</Layout>
