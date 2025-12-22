@@ -1,8 +1,25 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PostItem from "../components/PostItem.svelte";
+import { getCollection } from "astro:content";
+
+const portfolio = await getCollection("portfolio");
+
 ---
 
 
 <Layout title="Portfolio">
-    <h1>Portfolio</h1>
+
+    <section class="m-auto w-3/4 pt-40 pb-0">
+        <h1 class="text-6xl font-bold">Portfolio</h1>
+    </section>
+    <section class="m-auto w-1/2 py-20">
+        <div class="flex flex-col gap-4">
+            {
+              portfolio.map((portfolio) => (
+                <PostItem title={portfolio.data.title} slug={`/portfolio/${portfolio.slug}`} />
+              ))  
+            }
+        </div>
+    </section>
 </Layout>

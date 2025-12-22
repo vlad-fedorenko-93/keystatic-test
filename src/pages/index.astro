@@ -6,6 +6,9 @@ import Card from "../components/Card.svelte";
 
 const posts = await getCollection("posts");
 const postPreview = posts.slice(-3);
+
+const portfolio = await getCollection("portfolio");
+const portfolioPreview = portfolio.slice(-3);
 ---
 
 <Layout title="Keystatic & Astro's Content Collections">
@@ -25,12 +28,13 @@ const postPreview = posts.slice(-3);
 
   <!-- Portfolio -->
   <section class="m-auto w-3/4 py-40">
-    <h2 class="mb-4 text-4xl font-bold">Portfolio</h2>
+    <h2 class="mb-4 text-4xl font-bold">Latest case studies</h2>
     <div class="grid grid-cols-4 gap-4">
-      <Card title="Case Study 1" slug={`/portfolio/1`} />
-      <Card title="Case Study 2" slug={`/portfolio/2`} />
-      <Card title="Case Study 3" slug={`/portfolio/3`} />
-      <Card title="Case Study 4" slug={`/portfolio/4`} />
+      {
+        portfolioPreview.map((caseStudy) => (
+          <Card title={caseStudy.data.title} slug={`/portfolio/${caseStudy.slug}`} />
+        ))
+      }
     </div>
   </section>
 </Layout>

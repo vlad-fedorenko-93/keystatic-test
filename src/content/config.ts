@@ -11,5 +11,13 @@ const posts = defineCollection({
   }),
 });
 
+const portfolio = defineCollection({
+  // Type-check frontmatter using a schema
+  schema: z.object({
+    title: z.string(),
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
 // Export Collections
-export const collections = { posts };
+export const collections = { posts, portfolio };
