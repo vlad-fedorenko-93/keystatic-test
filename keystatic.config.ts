@@ -4,7 +4,11 @@ export default config({
   storage: {
     kind: 'local',
   },
+
+ 
   collections: {
+
+    // Blog post collection config
     posts: collection({
       label: 'Posts',
       slugField: 'title',
@@ -19,6 +23,14 @@ export default config({
             itemLabel: props => props.value,
           },
         ),
+        date: fields.date({
+          label: 'Date',
+          description: 'Date of the post'
+        }),
+        description: fields.text({
+          label: 'Description',
+          description: 'Description of the post'
+        }),
         content: fields.markdoc({
           label: 'Content',
           options: {
@@ -30,11 +42,13 @@ export default config({
         }),
       },
     }),
+
+    // Portfolio case studies config 
     portfolio: collection({
       label: 'Case Studies',
       slugField: 'title',
       path: 'src/content/portfolio/*',
-      format: { contentField: 'content'},
+      format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
         tags: fields.array(
@@ -42,8 +56,23 @@ export default config({
           {
             label: 'Tags',
             itemLabel: props => props.value,
-          },
-        ),
+          }),
+        category: fields.relationship({
+          label: 'Category',
+          collection: 'categories'
+        }),
+        year: fields.date({
+          label: 'Year',
+          description: 'Year of the project'
+        }),
+        description: fields.text({
+          label: 'Description',
+          description: 'Description of the project'
+        }),
+        demo: fields.url({
+          label: 'Live Demo',
+          description: 'Live demo of the project'
+        }),
         content: fields.markdoc({
           label: 'Content',
           options: {
@@ -54,6 +83,17 @@ export default config({
           },
         }),
       },
+    }),
+
+    // Project categories collection config
+    categories: collection({
+      label: 'Categories',
+      slugField: 'name',
+      path: 'src/content/categories/*',
+      format: { data: 'json' },
+      schema: {
+        name: fields.slug({ name: { label: 'Name' } })
+      }
     })
   },
 });

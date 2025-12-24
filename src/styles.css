@@ -27,6 +27,7 @@ article h4 {
 article p, li {
    font-size: 1.5rem;
    line-height: 1.5;
+   width: 100%;
 }
 
 article a {
@@ -44,3 +45,13 @@ article hr {
    margin: 3rem 0;
    border: 1px solid #e6e4e4;
 }
+
+article p{
+   display: flex;
+   flex-direction: column;
+}
+
+article p img{
+   width: 100%;
+}
+
