@@ -2,6 +2,10 @@
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import BlogPost from "../components/BlogPost.svelte";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+const thumbnails = import.meta.glob<{ default: ImageMetadata }>("../assets/thumbnails/posts/**/thumbnail.avif", { eager: true })
 
 const posts = await getCollection("posts");
 ---
@@ -15,7 +19,11 @@ const posts = await getCollection("posts");
         <div class="flex flex-col gap-8">
             {
               posts.map((post) => (
-                <BlogPost title={post.data.title} slug={`/posts/${post.slug}`} description={post.data.description} date={post.data.date} />
+                <BlogPost title={post.data.title} slug={`/posts/${post.slug}`} description={post.data.description} date={post.data.date}>
+                  <div class="w-96 h-[100%] rounded overflow-hidden">
+                    <Image src={thumbnails[`../assets/thumbnails/posts/${post.slug}/thumbnail.avif`].default} alt={post.data.title} quality={10}/>
+                  </div>
+                </BlogPost>
               ))  
             }
         </div>

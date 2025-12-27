@@ -3,6 +3,7 @@ import { getCollection, getEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Tag from "../../components/Tag.svelte";
 import Button from "../../components/Button.svelte";
+import { Image } from "astro:assets";
 
 // Generate static pages
 export async function getStaticPaths() {
@@ -15,6 +16,10 @@ export async function getStaticPaths() {
     params: { slug: post.slug },
     props: { id: index },
   }));
+}
+
+interface Props {
+  id: number;
 }
 
 // Find specific post
@@ -40,9 +45,14 @@ if (!post) throw new Error("No post found for this slug");
 
 // 4. Render the post content into a component
 const { Content } = await post.render();
+
+// Thumbnail
+const thumbnailModules = import.meta.glob<{ default: ImageMetadata }>("../../assets/thumbnails/posts/**/thumbnail.avif");
+const thumbnail = await thumbnailModules[`../../assets/thumbnails/posts/${post.slug}/thumbnail.avif`]?.();
 ---
 
 <Layout title={post.data.title}>
+  {/* Metadata */}
   <section >
     <div class="relative m-auto w-3/4 flex flex-col py-48">
       <a
@@ -51,23 +61,18 @@ const { Content } = await post.render();
       >
       <p class="mb-8">{formattedDate}</p>
       <h1 class="text-6xl font-bold mb-8">{post.data.title}</h1>
-      <div>{post.data.tags?.map((tag) => <Tag tag={tag} />)}</div>
+      <div class="flex gap-2">{post.data.tags?.map((tag) => <Tag tag={tag} />)}</div>
     </div>
   </section>
-
-  <section class="bg-slate-50 h-[800px]"></section>
+  {/* Thumbnail */}
+  <Image src={thumbnail.default} alt={post.data.title} />
+  {/* Content */}
   <section class="m-auto p-40 w-3/4">
     <Content />
   </section>
+  {/* Navigation */}
   <section class="m-auto p-40 w-3/4 grid grid-cols-2 gap-4">
     <Button label={"Previous post"} title={prevPost.data.title} slug={prevPost.slug}/>
     <Button label={"Next post"} title={nextPost.data.title} slug={nextPost.slug}/>
   </section>
 </Layout>
-
-<style>
-  div {
-    display: flex;
-    gap: 0.5rem;
-  }
-</style>

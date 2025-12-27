@@ -3,6 +3,8 @@ import { getCollection, getEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Tag from "../../components/Tag.svelte";
 import Button from "../../components/Button.svelte";
+import { Image } from "astro:assets";
+
 
 export async function getStaticPaths() {
     const portfolio = await getCollection("portfolio");
@@ -13,11 +15,21 @@ export async function getStaticPaths() {
     }));
 }
 
+interface Props {
+  id: number;
+}
+
 const { slug } = Astro.params;
 if (!slug) throw new Error("Slug not found");
 
 const caseStudy = await getEntry("portfolio", slug);
 
+
+// Thumbnail
+const thumbnailModules = import.meta.glob<{ default: ImageMetadata }>("../../assets/thumbnails/portfolio/**/thumbnail.avif");
+const thumbnail = await thumbnailModules[`../../assets/thumbnails/portfolio/${caseStudy.slug}/thumbnail.avif`]?.();
+
+// Previous and next case studies
 const portfolio = await getCollection("portfolio");
 const prevCaseStudy = !portfolio[Astro.props.id - 1]
     ? portfolio[portfolio.length - 1]
@@ -33,6 +45,7 @@ const formattedDate = caseStudy.data.year.toLocaleDateString("en-UK", {
 if (!caseStudy) throw new Error("Case study not found");
 
 const { Content } = await caseStudy.render();
+
 ---
 
 <Layout title={caseStudy.data.title}>
@@ -70,7 +83,7 @@ const { Content } = await caseStudy.render();
         </div>
     </section>
     {/* Thumbnail */}
-    <section class="bg-slate-100 h-[800px]"></section>
+    <Image src={thumbnail.default} alt={caseStudy.data.title} />
     {/* Content */}
     <section class="m-auto p-40 w-3/4">
         <Content />

@@ -16,6 +16,12 @@ export default config({
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
+        thumbnail: fields.image({
+          label: 'Thumbnail',
+          description: 'Thumbnail of the post',
+          directory: 'src/assets/thumbnails/posts',
+          publicPath: '../../thumbnails/posts',
+        }),
         tags: fields.array(
           fields.text({ label: 'Tag' }),
           {
@@ -35,7 +41,7 @@ export default config({
           label: 'Content',
           options: {
             image: {
-              directory: 'src/assets/images/posts',
+              directory: 'public/assets/images/posts',
               publicPath: '../../assets/images/posts/',
             },
           },
@@ -51,6 +57,12 @@ export default config({
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
+        thumbnail: fields.image({
+          label: 'Thumbnail',
+          description: 'Thumbnail of the project',
+          directory: 'src/assets/thumbnails/portfolio',
+          publicPath: '../../thumbnails/portfolio',
+        }),
         tags: fields.array(
           fields.text({ label: 'Tag' }),
           {
