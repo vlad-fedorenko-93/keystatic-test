@@ -1,9 +1,75 @@
-<section class="bg-slate-50">
-    <div class="mx-auto w-3/4 py-40">
-        <h1 class="text-6xl font-bold mb-4">Hi! I'm Vlad Fedorenko 👋</h1>
-        <p class="text-xl w-1/2">
-            I'm product designer and creative developer. In my blog I share my
-            creative process and the tools I use to create digital products.
-        </p>
+<script lang="ts">
+    import { onMount } from "svelte";
+    import "../animation.css";
+
+    let interBubble: HTMLDivElement;
+    let curX = 0;
+    let curY = 0;
+    let tgX = 0;
+    let tgY = 0;
+
+    onMount(() => {
+        let animationFrame: number;
+
+        function move() {
+            curX += (tgX - curX) / 20;
+            curY += (tgY - curY) / 20;
+            if (interBubble) {
+                interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
+            }
+            animationFrame = requestAnimationFrame(move);
+        }
+
+        const handleMouseMove = (event: MouseEvent) => {
+            tgX = event.clientX;
+            tgY = event.clientY;
+        };
+
+        window.addEventListener("mousemove", handleMouseMove);
+        animationFrame = requestAnimationFrame(move);
+
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            cancelAnimationFrame(animationFrame);
+        };
+    });
+</script>
+
+<div class="text-container flex flex-col justify-center items-center">
+    <h3 class="mb-4 text-xl">Hi! I'm Vladislav Fedorenko</h3>
+    <h1 class="mb-8 text-9xl font-black w-1/2 text-center uppercase">
+        Creative Developer
+    </h1>
+    <p class="mb-12 text-xl w-1/3 text-center">
+        I’m a Product Designer & Front-end Developer crafting intuitive
+        interfaces and scalable web experiences. From idea to production.
+    </p>
+</div>
+<div class="gradient-bg">
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur
+                    in="SourceGraphic"
+                    stdDeviation="10"
+                    result="blur"
+                />
+                <feColorMatrix
+                    in="blur"
+                    mode="matrix"
+                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+                    result="goo"
+                />
+                <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+        </defs>
+    </svg>
+    <div class="gradients-container">
+        <div class="g1"></div>
+        <div class="g2"></div>
+        <div class="g3"></div>
+        <div class="g4"></div>
+        <div class="g5"></div>
+        <div class="interactive" bind:this={interBubble}></div>
     </div>
-</section>
+</div>

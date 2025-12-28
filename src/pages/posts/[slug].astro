@@ -65,7 +65,7 @@ const thumbnail = await thumbnailModules[`../../assets/thumbnails/posts/${post.s
     </div>
   </section>
   {/* Thumbnail */}
-  <Image src={thumbnail.default} alt={post.data.title} width={2000} loading="eager"/>
+  <Image src={thumbnail.default} alt={post.data.title} priority fit="cover" width={2000} height={1000} />
   {/* Content */}
   <section class="m-auto p-40 w-3/4">
     <Content />

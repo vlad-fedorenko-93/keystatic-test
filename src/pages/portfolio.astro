@@ -24,7 +24,7 @@ const portfolio = await getCollection("portfolio");
             slug={`/portfolio/${caseStudy.slug}`}
             description={caseStudy.data.description}
           >
-            <Image src={thumbnails[`../assets/thumbnails/portfolio/${caseStudy.slug}/thumbnail.avif`].default} alt={caseStudy.data.title} width={600}/>
+            <Image src={thumbnails[`../assets/thumbnails/portfolio/${caseStudy.slug}/thumbnail.avif`].default} alt={caseStudy.data.title} priority fit="cover" width={600}/>
           </CaseStudyItem>
         ))
       }

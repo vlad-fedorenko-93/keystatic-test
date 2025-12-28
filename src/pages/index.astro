@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.svelte";
+import About from "../components/About.svelte";
 import Card from "../components/Card.svelte";
 
 const posts = await getCollection("posts");
@@ -12,7 +13,23 @@ const portfolioPreview = portfolio.slice(-3);
 ---
 
 <Layout title="Keystatic & Astro's Content Collections">
-  <Hero />
+  <Hero client:load />
+  <About />
+
+  <!-- Portfolio -->
+  <section class="m-auto w-3/4 py-40">
+    <h2 class="mb-4 text-4xl font-bold">Latest case studies</h2>
+    <div class="grid grid-cols-4 gap-4">
+      {
+        portfolioPreview.map((caseStudy) => (
+          <Card
+            title={caseStudy.data.title}
+            slug={`/portfolio/${caseStudy.slug}`}
+          />
+        ))
+      }
+    </div>
+  </section>
 
   <!-- Posts -->
   <section class="m-auto w-3/4 py-40">
@@ -21,18 +38,6 @@ const portfolioPreview = portfolio.slice(-3);
       {
         postPreview.map((post) => (
           <Card title={post.data.title} slug={`/posts/${post.slug}`} />
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- Portfolio -->
-  <section class="m-auto w-3/4 py-40">
-    <h2 class="mb-4 text-4xl font-bold">Latest case studies</h2>
-    <div class="grid grid-cols-4 gap-4">
-      {
-        portfolioPreview.map((caseStudy) => (
-          <Card title={caseStudy.data.title} slug={`/portfolio/${caseStudy.slug}`} />
         ))
       }
     </div>
