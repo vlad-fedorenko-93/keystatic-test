@@ -1,4 +1,4 @@
-<nav class="px-6 py-3 border-b border-gray-200 flex justify-between items-center">
+<nav class="fixed top-0 left-0 right-0 z-50 px-6 py-3 border-b border-gray-200 bg-white flex justify-between items-center">
     <a class="text-lg font-bold" href="/">V. Fedorenko</a>
 
     <div class="flex items-center gap-2">
