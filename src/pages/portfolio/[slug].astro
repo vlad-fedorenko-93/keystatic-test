@@ -83,7 +83,7 @@ const { Content } = await caseStudy.render();
         </div>
     </section>
     {/* Thumbnail */}
-    <Image src={thumbnail.default} alt={caseStudy.data.title} />
+    <Image src={thumbnail.default} alt={caseStudy.data.title} width={2000} loading="eager"/>
     {/* Content */}
     <section class="m-auto p-40 w-3/4">
         <Content />
