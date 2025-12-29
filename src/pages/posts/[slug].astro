@@ -2,7 +2,7 @@
 import { getCollection, getEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Tag from "../../components/Tag.svelte";
-import Button from "../../components/Button.svelte";
+import NavButton from "../../components/NavButton.svelte";
 import { Image } from "astro:assets";
 
 // Generate static pages
@@ -31,8 +31,12 @@ if (!slug) throw new Error("Slug not found");
 const post = await getEntry("posts", slug);
 
 const posts = await getCollection("posts");
-const prevPost = !posts[Astro.props.id - 1] ? posts[posts.length - 1] : posts[Astro.props.id - 1];
-const nextPost = !posts[Astro.props.id + 1] ? posts[0] : posts[Astro.props.id + 1];
+const prevPost = !posts[Astro.props.id - 1]
+  ? posts[posts.length - 1]
+  : posts[Astro.props.id - 1];
+const nextPost = !posts[Astro.props.id + 1]
+  ? posts[0]
+  : posts[Astro.props.id + 1];
 
 const formattedDate = post.data.date.toLocaleDateString("en-UK", {
   year: "numeric",
@@ -40,20 +44,24 @@ const formattedDate = post.data.date.toLocaleDateString("en-UK", {
   day: "numeric",
 });
 
-
 if (!post) throw new Error("No post found for this slug");
 
 // 4. Render the post content into a component
 const { Content } = await post.render();
 
 // Thumbnail
-const thumbnailModules = import.meta.glob<{ default: ImageMetadata }>("../../assets/thumbnails/posts/**/thumbnail.avif");
-const thumbnail = await thumbnailModules[`../../assets/thumbnails/posts/${post.slug}/thumbnail.avif`]?.();
+const thumbnailModules = import.meta.glob<{ default: ImageMetadata }>(
+  "../../assets/thumbnails/posts/**/thumbnail.avif",
+);
+const thumbnail =
+  await thumbnailModules[
+    `../../assets/thumbnails/posts/${post.slug}/thumbnail.avif`
+  ]?.();
 ---
 
 <Layout title={post.data.title}>
   {/* Metadata */}
-  <section >
+  <section class="mt-16">
     <div class="relative m-auto w-3/4 flex flex-col py-48">
       <a
         class="absolute top-6 text-md text-slate-500 hover:text-slate-800"
@@ -61,18 +69,35 @@ const thumbnail = await thumbnailModules[`../../assets/thumbnails/posts/${post.s
       >
       <p class="mb-8">{formattedDate}</p>
       <h1 class="text-6xl font-bold mb-8">{post.data.title}</h1>
-      <div class="flex gap-2">{post.data.tags?.map((tag) => <Tag tag={tag} />)}</div>
+      <div class="flex gap-2">
+        {post.data.tags?.map((tag) => <Tag tag={tag} />)}
+      </div>
     </div>
   </section>
   {/* Thumbnail */}
-  <Image src={thumbnail.default} alt={post.data.title} priority fit="cover" width={2000} height={1000} />
+  <Image
+    src={thumbnail.default}
+    alt={post.data.title}
+    priority
+    fit="cover"
+    width={2000}
+    height={1000}
+  />
   {/* Content */}
   <section class="m-auto p-40 w-3/4">
     <Content />
   </section>
   {/* Navigation */}
   <section class="m-auto p-40 w-3/4 grid grid-cols-2 gap-4">
-    <Button label={"Previous post"} title={prevPost.data.title} slug={prevPost.slug}/>
-    <Button label={"Next post"} title={nextPost.data.title} slug={nextPost.slug}/>
+    <NavButton
+      label={"Previous post"}
+      title={prevPost.data.title}
+      slug={prevPost.slug}
+    />
+    <NavButton
+      label={"Next post"}
+      title={nextPost.data.title}
+      slug={nextPost.slug}
+    />
   </section>
 </Layout>

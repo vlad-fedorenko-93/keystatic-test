@@ -3,23 +3,29 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.svelte";
 import About from "../components/About.svelte";
+import Contact from "../components/Contact.svelte";
 import Card from "../components/Card.svelte";
+import Button from "../components/Button.svelte";
 
 const posts = await getCollection("posts");
-const postPreview = posts.slice(-3);
+const postPreview = posts.slice(-2);
 
 const portfolio = await getCollection("portfolio");
-const portfolioPreview = portfolio.slice(-3);
+const portfolioPreview = portfolio.slice(-2);
 ---
 
-<Layout title="Keystatic & Astro's Content Collections">
+<Layout title="Vladislav Fedorenko">
   <Hero client:load />
   <About />
 
   <!-- Portfolio -->
-  <section class="m-auto w-3/4 py-40">
-    <h2 class="mb-4 text-4xl font-bold">Latest case studies</h2>
-    <div class="grid grid-cols-4 gap-4">
+  <section class="m-auto w-3/4 py-40 grid grid-cols-2 gap-4">
+    <div>
+      <h2 class="mb-2 w-4/5 text-5xl font-bold">What I've been working on</h2>
+      <p class="mb-8 w-1/2 text-xl">My portfolio showcases my latest projects and case studies</p>
+      <Button label="See portfolio" slug="/portfolio" />
+    </div>
+    <div class="grid grid-cols-2 gap-4">
       {
         portfolioPreview.map((caseStudy) => (
           <Card
@@ -32,9 +38,13 @@ const portfolioPreview = portfolio.slice(-3);
   </section>
 
   <!-- Posts -->
-  <section class="m-auto w-3/4 py-40">
-    <h2 class="mb-4 text-4xl font-bold">Latest posts</h2>
-    <div class="grid grid-cols-4 gap-4">
+  <section class="m-auto w-3/4 py-40 grid grid-cols-2 gap-4">
+    <div>
+      <h2 class="mb-2 w-4/5 text-5xl font-bold">Sharing insights</h2>
+      <p class="mb-8 w-1/2 text-xl">My blog features articles on web development, design, and more</p>
+      <Button label="See blog" slug="/posts" />
+    </div>
+    <div class="grid grid-cols-2 gap-4">
       {
         postPreview.map((post) => (
           <Card title={post.data.title} slug={`/posts/${post.slug}`} />
@@ -42,4 +52,6 @@ const portfolioPreview = portfolio.slice(-3);
       }
     </div>
   </section>
+
+  <Contact />
 </Layout>
