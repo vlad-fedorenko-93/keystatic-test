@@ -35,15 +35,16 @@
     });
 </script>
 
-<div class="text-container flex flex-col justify-center items-center">
+<div class="relative text-container flex flex-col justify-center items-center">
     <h3 class="mb-4 text-xl">Hi! I'm Vladislav Fedorenko</h3>
-    <h1 class="mb-8 text-9xl font-black w-1/2 text-center uppercase">
+    <h1 class="mb-8 font-black">
         Creative Developer
     </h1>
     <p class="mb-12 text-xl w-1/3 text-center">
         I’m a Product Designer & Front-end Developer crafting intuitive
         interfaces and scalable web experiences. From idea to production.
     </p>
+    <a class="absolute bottom-4 right-4 opacity-30 hover:opacity-100 transition-all text-xs text-white" href="https://codepen.io/glitchworker">Animation by GlitchWorker</a>
 </div>
 <div class="gradient-bg">
     <svg xmlns="http://www.w3.org/2000/svg">
@@ -73,3 +74,12 @@
         <div class="interactive" bind:this={interBubble}></div>
     </div>
 </div>
+
+<style>
+    h1 {
+        font-size: 12vw;
+        line-height: .9;
+        text-align: center;
+        text-transform: uppercase;
+    }
+</style>

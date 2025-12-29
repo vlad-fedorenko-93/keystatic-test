@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+@font-face {
+   font-family: "Clash Display";
+   src: url("./assets/fonts/ClashDisplay-Variable.woff2") format("woff2");
+}
+
+@font-face {
+   font-family: "Clash Grotesk";
+   src: url("./assets/fonts/ClashGrotesk-Variable.woff2") format("woff2");
+}
+
+h1, h2, h3, h4, h5, h6 {
+   font-family: "Clash Display";
+}
+
+p, li, a, span {
+   font-family: "Clash Grotesk";
+}
+
+
 
 article h1 {
    font-size: 4rem;
