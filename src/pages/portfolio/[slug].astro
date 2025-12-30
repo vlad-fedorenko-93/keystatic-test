@@ -56,12 +56,12 @@ const { Content } = await caseStudy.render();
         {/* Metadata */}
         <section class="pt-16">
             <div
-                class="grid grid-cols-2 items-center relative m-auto w-3/4 flex items-start py-48"
+                class="content grid grid-cols-2 items-center relative m-auto w-3/4 flex items-start py-48"
             >
                 <a class="back absolute top-6 text-md" href="/portfolio"
                     >Back to portfolio</a
                 >
-                <div class="flex flex-col items-start gap-2">
+                <div class="title flex flex-col items-start gap-2">
                     <h1 class="text text-6xl font-bold mb-4">
                         {caseStudy.data.title}
                     </h1>
@@ -87,7 +87,7 @@ const { Content } = await caseStudy.render();
                         class="grid grid-cols-2 w-full py-6 border-b border-[var(--color-border)]"
                     >
                         <p class="text-xl text-muted subtitle">Tags</p>
-                        <div class="flex gap-2">
+                        <div class="flex flex-wrap gap-2">
                             {
                                 caseStudy.data.tags?.map((tag) => (
                                     <Tag tag={tag} />
@@ -108,11 +108,11 @@ const { Content } = await caseStudy.render();
             height={1000}
         />
         {/* Content */}
-        <article class="m-auto p-40 w-3/4">
+        <article class="m-auto py-40 w-3/5">
             <Content />
         </article>
         {/* Navigation */}
-        <section class="m-auto p-40 w-3/4 grid grid-cols-2 gap-4">
+        <section class="nav m-auto py-24 w-3/5 grid grid-cols-2 gap-4">
             <NavButton
                 label={"Previous case study"}
                 title={prevCaseStudy.data.title}
@@ -151,5 +151,38 @@ const { Content } = await caseStudy.render();
 
     .back:hover {
         color: var(--color-base-content);
+    }
+
+    @media (max-width: 900px) {
+        .content {
+            grid-template-rows: fit-content fit-content;
+            grid-template-columns: 1fr;
+            padding: 4rem 0;
+            width: 90%;
+        }
+
+        .content .title {
+            margin-bottom: 4rem;
+        }
+
+        .content .title h1 {
+            font-size: 2.5rem;
+        }
+
+        .content .title p {
+            margin-bottom: 1rem;
+        }
+
+        article {
+            width: 90%;
+            padding: 4rem 0;
+        }
+
+        .nav {
+            grid-template-rows: fit-content fit-content;
+            grid-template-columns: 1fr;
+            width: 90%;
+            padding: 0 0 4rem 0;
+        }
     }
 </style>

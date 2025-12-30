@@ -33,4 +33,11 @@
     .bg a:hover {
         color: var(--color-base-content);
     }
+
+    @media (max-width: 900px) {
+        footer {
+            flex-direction: column;
+            gap: 2rem;
+        }
+    }
 </style>

@@ -3,8 +3,8 @@
     import DateFormater from "./DateFormater.svelte";
 </script>
 
-<a class="min-h-40 flex items-center p-8" href={slug}>
-    <div class="p-6 w-full">
+<a class="card min-h-40 flex items-center p-8" href={slug}>
+    <div class="title p-6 w-full">
         <DateFormater className="mb-4 text-[var(--color-base-content-muted)]" date={date} />
         <h4 class="text-4xl font-bold mb-4">{title}</h4>
         <p class="text-lg">{description}</p>
@@ -40,5 +40,23 @@
         border-radius: 8px;
         scale: 1;
         transition: all 0.3s ease-in-out;
+    }
+
+    @media (max-width: 900px) {
+        .card {
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .card .title {
+            padding: 0;
+        }
+
+        .card .thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+        }
     }
 </style>

@@ -1,6 +1,6 @@
 <section id="contact" class="py-40 bg">
-    <div class="w-3/4 m-auto grid grid-cols-2 gap-8">
-        <div>
+    <div class="content w-3/4 m-auto grid grid-cols-2 gap-8">
+        <div class="title">
             <h1 class="text-5xl mb-4">Contact</h1>
             <p class="text-xl w-3/5">
                 Feel free to reach out. I'm always open to new opportunities and
@@ -48,5 +48,29 @@
         height: 1px;
         border-color: var(--color-border);
         margin: 1rem 0;
+    }
+
+    @media (max-width: 900px) {
+
+        #contact {
+            padding: 4rem 0 6rem 0;
+        }
+        .content {
+            grid-template-rows: fit-content fit-content;
+            grid-template-columns: 1fr;
+        }
+
+        .content .title {
+            margin-bottom: 4rem;
+        }
+
+        .content div h1 {
+            font-size: 2.5rem;
+            width: 100%;
+        }
+
+        .content div p {
+            width: 100%;
+        }
     }
 </style>

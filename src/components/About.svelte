@@ -1,6 +1,6 @@
 <section class="bg-[var(--color-base-100)]">
-    <div class="w-3/4 m-auto grid grid-cols-2 gap-8">
-        <div class="flex flex-col justify-center items-center py-40">
+    <div class="w-3/4 m-auto grid grid-cols-2 gap-8 content py-40">
+        <div class="flex flex-col justify-center items-center">
             <h1 class="mb-8 text-5xl text-[var(--color-base-content)]">
                 I'm a Front-end Developer with UI/UX Designer background.
                 Passionate to create interactive digital products.
@@ -16,7 +16,7 @@
                 into bespoke, user-friendly and stunning websites.
             </p>
         </div>
-        <div class="my-40 p-8 bg-[var(--color-base-200)] rounded-lg">
+        <div class="p-8 bg-[var(--color-base-200)] rounded-lg">
             <h3 class="text-3xl mb-6 text-[var(--color-base-content)]">
                 My Services include
             </h3>
@@ -58,5 +58,16 @@
 
     hr {
         border-color: var(--color-border);
+    }
+
+    @media (max-width: 900px) {
+        .content {
+            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 1fr;
+        }
+
+        .content div h1 {
+            font-size: 2.5rem;
+        }
     }
 </style>

@@ -30,8 +30,8 @@ const postThumbnails = import.meta.glob<{ default: ImageMetadata }>(
 
   <!-- Portfolio -->
   <section class="bg">
-    <div class="m-auto w-3/4 py-40 grid grid-cols-5 gap-4">
-      <div class="col-span-2">
+    <div class="content m-auto w-3/4 py-40 grid grid-cols-5 gap-4">
+      <div class="title col-span-2">
         <h2 class="text mb-2 w-4/5 text-5xl font-bold">
           What I've been working on
         </h2>
@@ -40,7 +40,7 @@ const postThumbnails = import.meta.glob<{ default: ImageMetadata }>(
         </p>
         <Button label="See portfolio" slug="/portfolio" />
       </div>
-      <div class="col-span-3 grid grid-cols-2 gap-4">
+      <div class="cards col-span-3 grid grid-cols-2 gap-4">
         {
           portfolioPreview.map((caseStudy) => (
             <CaseStudyItem
@@ -66,15 +66,15 @@ const postThumbnails = import.meta.glob<{ default: ImageMetadata }>(
 
   <!-- Posts -->
   <section class="bg">
-    <div class="m-auto w-3/4 py-40 grid grid-cols-5 gap-4">
-      <div class="col-span-2">
+    <div class="content m-auto w-3/4 py-40 grid grid-cols-5 gap-4">
+      <div class="title col-span-2">
         <h2 class="text mb-2 w-4/5 text-5xl font-bold">Sharing insights</h2>
         <p class="text-muted mb-8 w-2/3 text-xl">
           My blog features articles on web development, design, and more
         </p>
         <Button label="See blog" slug="/posts" />
       </div>
-      <div class="col-span-3 grid grid-cols-2 gap-4">
+      <div class="cards col-span-3 grid grid-cols-2 gap-4">
         {
           postPreview.map((post) => (
             <CaseStudyItem
@@ -113,4 +113,39 @@ const postThumbnails = import.meta.glob<{ default: ImageMetadata }>(
   .text-muted {
     color: var(--color-base-content-muted);
   }
+
+  @media (max-width: 900px) {
+        .content {
+            grid-template-rows: fit-content fit-content;
+            grid-template-columns: 1fr;
+            padding: 4rem 0;
+        }
+
+        .content div {
+            grid-column: auto;
+            grid-row: auto;
+        }
+
+        .content .title {
+          margin-bottom: 4rem;
+        }
+
+        .content .title h2 {
+          font-size: 2.5rem;
+          width: 100%;
+        }
+
+        .content .title p {
+          width: 100%;
+        }
+
+        .content .cards {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+        }
+
+        .content div h1 {
+            font-size: 2.5rem;
+        }
+    }
 </style>

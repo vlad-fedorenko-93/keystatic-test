@@ -64,7 +64,7 @@ const thumbnail =
   <section class="bg">
     {/* Metadata */}
     <section class="pt-16">
-      <div class="relative m-auto w-3/4 flex flex-col py-48">
+      <div class="content relative m-auto w-3/4 flex flex-col py-48">
         <a class="back absolute top-6 text-md" href="/posts">Back to blog</a>
         <DateFormater
           className="mb-8 text-[var(--color-base-content-muted)]"
@@ -90,7 +90,7 @@ const thumbnail =
       <Content />
     </article>
     {/* Navigation */}
-    <section class="m-auto p-40 w-3/4 grid grid-cols-2 gap-4">
+    <section class="nav m-auto p-40 w-3/4 grid grid-cols-2 gap-4">
       <NavButton
         label={"Previous post"}
         title={prevPost.data.title}
@@ -126,4 +126,27 @@ const thumbnail =
   .back:hover {
     color: var(--color-base-content);
   }
+
+  @media (max-width: 900px) {
+        .content {
+            padding: 4rem 0;
+            width: 90%;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+        }
+
+        article {
+            width: 90%;
+            padding: 4rem 0;
+        }
+
+        .nav {
+            grid-template-rows: fit-content fit-content;
+            grid-template-columns: 1fr;
+            width: 90%;
+            padding: 0 0 4rem 0;
+        }
+    }
 </style>

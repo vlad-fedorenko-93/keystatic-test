@@ -76,14 +76,14 @@
 <style>
     h1 {
         font-weight: 900;
-        font-size: 12vw;
+        font-size: max(12vw, 4.5rem);
         line-height: 0.9;
         text-align: center;
         text-transform: uppercase;
     }
 
     h3 {
-        font-size: 1.5vw;
+        font-size: max(1.5vw, 1rem);
         letter-spacing: 0.1em;
         line-height: 0.9;
         text-align: center;
