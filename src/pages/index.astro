@@ -4,14 +4,24 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.svelte";
 import About from "../components/About.svelte";
 import Contact from "../components/Contact.svelte";
-import Card from "../components/Card.svelte";
 import Button from "../components/Button.svelte";
+import CaseStudyItem from "../components/CaseStudyItem.svelte";
+import { Image } from "astro:assets";
 
 const posts = await getCollection("posts");
 const postPreview = posts.slice(-2);
 
 const portfolio = await getCollection("portfolio");
 const portfolioPreview = portfolio.slice(-2);
+
+const portfolioThumbnails = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/thumbnails/portfolio/**/thumbnail.avif",
+  { eager: true },
+);
+const postThumbnails = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/thumbnails/posts/**/thumbnail.avif",
+  { eager: true },
+);
 ---
 
 <Layout title="Vladislav Fedorenko">
@@ -19,39 +29,88 @@ const portfolioPreview = portfolio.slice(-2);
   <About />
 
   <!-- Portfolio -->
-  <section class="m-auto w-3/4 py-40 grid grid-cols-2 gap-4">
-    <div>
-      <h2 class="mb-2 w-4/5 text-5xl font-bold">What I've been working on</h2>
-      <p class="mb-8 w-1/2 text-xl">My portfolio showcases my latest projects and case studies</p>
-      <Button label="See portfolio" slug="/portfolio" />
-    </div>
-    <div class="grid grid-cols-2 gap-4">
-      {
-        portfolioPreview.map((caseStudy) => (
-          <Card
-            title={caseStudy.data.title}
-            slug={`/portfolio/${caseStudy.slug}`}
-          />
-        ))
-      }
+  <section class="bg">
+    <div class="m-auto w-3/4 py-40 grid grid-cols-5 gap-4">
+      <div class="col-span-2">
+        <h2 class="text mb-2 w-4/5 text-5xl font-bold">
+          What I've been working on
+        </h2>
+        <p class="text-muted mb-8 w-2/3 text-xl">
+          My portfolio showcases my latest projects and case studies
+        </p>
+        <Button label="See portfolio" slug="/portfolio" />
+      </div>
+      <div class="col-span-3 grid grid-cols-2 gap-4">
+        {
+          portfolioPreview.map((caseStudy) => (
+            <CaseStudyItem
+              title={caseStudy.data.title}
+              slug={`/portfolio/${caseStudy.slug}`}
+              description={caseStudy.data.description}
+              date={caseStudy.data.date}
+            >
+              <Image
+                src={
+                  portfolioThumbnails[
+                    `../assets/thumbnails/portfolio/${caseStudy.slug}/thumbnail.avif`
+                  ]?.default
+                }
+                alt={caseStudy.data.title}
+              />
+            </CaseStudyItem>
+          ))
+        }
+      </div>
     </div>
   </section>
 
   <!-- Posts -->
-  <section class="m-auto w-3/4 py-40 grid grid-cols-2 gap-4">
-    <div>
-      <h2 class="mb-2 w-4/5 text-5xl font-bold">Sharing insights</h2>
-      <p class="mb-8 w-1/2 text-xl">My blog features articles on web development, design, and more</p>
-      <Button label="See blog" slug="/posts" />
-    </div>
-    <div class="grid grid-cols-2 gap-4">
-      {
-        postPreview.map((post) => (
-          <Card title={post.data.title} slug={`/posts/${post.slug}`} />
-        ))
-      }
+  <section class="bg">
+    <div class="m-auto w-3/4 py-40 grid grid-cols-5 gap-4">
+      <div class="col-span-2">
+        <h2 class="text mb-2 w-4/5 text-5xl font-bold">Sharing insights</h2>
+        <p class="text-muted mb-8 w-2/3 text-xl">
+          My blog features articles on web development, design, and more
+        </p>
+        <Button label="See blog" slug="/posts" />
+      </div>
+      <div class="col-span-3 grid grid-cols-2 gap-4">
+        {
+          postPreview.map((post) => (
+            <CaseStudyItem
+              title={post.data.title}
+              slug={`/posts/${post.slug}`}
+              description={post.data.description}
+              date={post.data.date}
+            >
+              <Image
+                src={
+                  postThumbnails[
+                    `../assets/thumbnails/posts/${post.slug}/thumbnail.avif`
+                  ]?.default
+                }
+                alt={post.data.title}
+              />
+            </CaseStudyItem>
+          ))
+        }
+      </div>
     </div>
   </section>
 
   <Contact />
 </Layout>
+
+<style>
+  .bg {
+    background-color: var(--color-base-100);
+  }
+
+  .text {
+    color: var(--color-base-content);
+  }
+
+  .text-muted {
+    color: var(--color-base-content-muted);
+  }
+</style>

@@ -3,6 +3,7 @@ import { getCollection, getEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Tag from "../../components/Tag.svelte";
 import NavButton from "../../components/NavButton.svelte";
+import DateFormater from "../../components/DateFormater.svelte";
 import { Image } from "astro:assets";
 
 // Generate static pages
@@ -60,44 +61,69 @@ const thumbnail =
 ---
 
 <Layout title={post.data.title}>
-  {/* Metadata */}
-  <section class="mt-16">
-    <div class="relative m-auto w-3/4 flex flex-col py-48">
-      <a
-        class="absolute top-6 text-md text-slate-500 hover:text-slate-800"
-        href="/posts">Back to blog</a
-      >
-      <p class="mb-8">{formattedDate}</p>
-      <h1 class="text-6xl font-bold mb-8">{post.data.title}</h1>
-      <div class="flex gap-2">
-        {post.data.tags?.map((tag) => <Tag tag={tag} />)}
+  <section class="bg">
+    {/* Metadata */}
+    <section class="pt-16">
+      <div class="relative m-auto w-3/4 flex flex-col py-48">
+        <a class="back absolute top-6 text-md" href="/posts">Back to blog</a>
+        <DateFormater
+          className="mb-8 text-[var(--color-base-content-muted)]"
+          date={post.data.date}
+        />
+        <h1 class="text-6xl font-bold mb-8 text">{post.data.title}</h1>
+        <div class="flex gap-2">
+          {post.data.tags?.map((tag) => <Tag tag={tag} />)}
+        </div>
       </div>
-    </div>
-  </section>
-  {/* Thumbnail */}
-  <Image
-    src={thumbnail.default}
-    alt={post.data.title}
-    priority
-    fit="cover"
-    width={2000}
-    height={1000}
-  />
-  {/* Content */}
-  <section class="m-auto p-40 w-3/4">
-    <Content />
-  </section>
-  {/* Navigation */}
-  <section class="m-auto p-40 w-3/4 grid grid-cols-2 gap-4">
-    <NavButton
-      label={"Previous post"}
-      title={prevPost.data.title}
-      slug={prevPost.slug}
+    </section>
+    {/* Thumbnail */}
+    <Image
+      src={thumbnail.default}
+      alt={post.data.title}
+      priority
+      fit="cover"
+      width={2000}
+      height={1000}
     />
-    <NavButton
-      label={"Next post"}
-      title={nextPost.data.title}
-      slug={nextPost.slug}
-    />
+    {/* Content */}
+    <article class="m-auto p-40 w-3/4">
+      <Content />
+    </article>
+    {/* Navigation */}
+    <section class="m-auto p-40 w-3/4 grid grid-cols-2 gap-4">
+      <NavButton
+        label={"Previous post"}
+        title={prevPost.data.title}
+        slug={prevPost.slug}
+      />
+      <NavButton
+        label={"Next post"}
+        title={nextPost.data.title}
+        slug={nextPost.slug}
+      />
+    </section>
   </section>
 </Layout>
+
+<style>
+  .bg {
+    background-color: var(--color-base-100);
+  }
+
+  .text {
+    color: var(--color-base-content);
+  }
+
+  .text-muted {
+    color: var(--color-base-content-muted);
+  }
+
+  .back {
+    color: var(--color-base-content-muted);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .back:hover {
+    color: var(--color-base-content);
+  }
+</style>

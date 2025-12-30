@@ -1,16 +1,44 @@
 <script>
-    let { title, slug, description, date, children } = $props()
+    let { title, slug, description, date, children } = $props();
+    import DateFormater from "./DateFormater.svelte";
 </script>
 
-<a class="min-h-40 flex items-center p-8 hover:bg-slate-50 active:bg-slate-100" href={slug}>
+<a class="min-h-40 flex items-center p-8" href={slug}>
     <div class="p-6 w-full">
-        <p class="mb-4">{date.toLocaleDateString("en-UK", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        })}</p>
+        <DateFormater className="mb-4 text-[var(--color-base-content-muted)]" date={date} />
         <h4 class="text-4xl font-bold mb-4">{title}</h4>
         <p class="text-lg">{description}</p>
     </div>
-    {@render children()}
+    <div class="thumbnail">
+        {@render children()}
+    </div>
 </a>
+
+<style>
+    h4 {
+        color: var(--color-base-content);
+    }
+
+    p {
+        color: var(--color-base-content-muted);
+    }
+
+    a {
+        transition: all 0.3s ease-in-out;
+    }
+
+    a:hover {
+        background-color: oklch(from var(--color-base-100) calc(l - 0.05) c h);
+        z-index: 1;
+        border-radius: 12   px;
+    }
+
+    .thumbnail {
+        width: 500px;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        border-radius: 8px;
+        scale: 1;
+        transition: all 0.3s ease-in-out;
+    }
+</style>

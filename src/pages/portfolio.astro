@@ -5,29 +5,53 @@ import CaseStudyItem from "../components/CaseStudyItem.svelte";
 import { getCollection } from "astro:content";
 import type { ImageMetadata } from "astro";
 
-const thumbnails = import.meta.glob<{ default: ImageMetadata }>("../assets/thumbnails/portfolio/**/thumbnail.avif", { eager: true })
+const thumbnails = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/thumbnails/portfolio/**/thumbnail.avif",
+  { eager: true },
+);
 
 const portfolio = await getCollection("portfolio");
-
 ---
 
 <Layout title="Portfolio">
-  <section class="m-auto w-3/5 pt-40 pb-0">
-    <h1 class="text-7xl font-bold text-center mb-8">Portfolio</h1>
-  </section>
-  <section class="m-auto w-3/5 py-20">
-    <div class="grid grid-cols-2 auto-rows-fr gap-4">
-      {
-        portfolio.map((caseStudy) => (
-          <CaseStudyItem
-            title={caseStudy.data.title}
-            slug={`/portfolio/${caseStudy.slug}`}
-            description={caseStudy.data.description}
-          >
-            <Image src={thumbnails[`../assets/thumbnails/portfolio/${caseStudy.slug}/thumbnail.avif`].default} alt={caseStudy.data.title} priority fit="cover" width={600}/>
-          </CaseStudyItem>
-        ))
-      }
+  <section class="bg">
+    <div class="m-auto w-3/5 pt-40 pb-0">
+      <h1 class="text-7xl font-bold text-center mb-8">Portfolio</h1>
+    </div>
+    <div class="m-auto w-3/5 py-20">
+      <div class="grid grid-cols-2 auto-rows-fr gap-4">
+        {
+          portfolio.map((caseStudy) => (
+            <CaseStudyItem
+              title={caseStudy.data.title}
+              slug={`/portfolio/${caseStudy.slug}`}
+              description={caseStudy.data.description}
+            >
+              <Image
+                src={
+                  thumbnails[
+                    `../assets/thumbnails/portfolio/${caseStudy.slug}/thumbnail.avif`
+                  ].default
+                }
+                alt={caseStudy.data.title}
+                priority
+                fit="cover"
+                width={600}
+              />
+            </CaseStudyItem>
+          ))
+        }
+      </div>
     </div>
   </section>
 </Layout>
+
+<style>
+  .bg {
+    background-color: var(--color-base-100);
+  }
+
+  h1 {
+    color: var(--color-base-content);
+  }
+</style>

@@ -1,12 +1,16 @@
 <script>
-    let { title, slug, description, children } = $props();
+    let { title, slug, description, date, children } = $props();
+    import DateFormater from "./DateFormater.svelte";
 </script>
 
-<a class="card flex flex-col bg-white" href={slug}>
+<a class="card flex flex-col" href={slug}>
     <div class="thumbnail mb-4">
         {@render children()}
     </div>
     <div class="title-section mb-12">
+        {#if date}
+            <DateFormater className="mb-0 text-[var(--color-base-content-muted)]" {date} />
+        {/if}
         <h4 class="text-3xl font-bold">{title}</h4>
         <p>{description}</p>
     </div>
@@ -17,16 +21,23 @@
         transition: all 0.3s ease-in-out;
     }
 
+    h4 {
+        color: var(--color-base-content);
+    }
+
+    p {
+        color: var(--color-base-content-muted);
+    }
+
     .card:hover {
+        background-color: oklch(from var(--color-base-100) calc(l - 0.05) c h);
         transform: scale(1.08);
         z-index: 1;
         border-radius: 20px;
-        box-shadow:
-            0 4px 8px 0 rgba(0, 0, 0, 0.12),
-            0 12px 28px 0 rgba(0, 0, 0, 0.1);
     }
 
     .card .thumbnail {
+        aspect-ratio: 16 / 9;
         overflow: hidden;
         border-radius: 8px;
         scale: 1;
@@ -35,7 +46,8 @@
 
     .card:hover .thumbnail {
         border-radius: 12px;
-        scale: .95;
+        scale: 0.95;
+        transform: translateY(3px);
     }
 
     .card .title-section {

@@ -36,7 +36,7 @@
 </script>
 
 <div class="relative text-container flex flex-col justify-center items-center">
-    <h3 class="mb-4">Hi! I'm Vladislav Fedorenko</h3>
+    <h3 class="mb-8">Hi! I'm Vladyslav Fedorenko</h3>
     <h1 class="mb-8 font-black">Creative Developer</h1>
     <h3>Based in Ukraine</h3>
     <a
