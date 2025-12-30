@@ -13,7 +13,7 @@ const posts = await getCollection("posts");
 
 <Layout title="Blog">
   <section class="bg">
-    <div class="m-auto w-3/4 pt-40 pb-0">
+    <div class="m-auto pt-40 pb-0">
         <h1 class="text-7xl font-bold text-center">Blog</h1>
     </div>
     <div class="posts m-auto w-3/5 py-20">
@@ -48,6 +48,10 @@ const posts = await getCollection("posts");
 
        .thumbnail {
         width: 100%;
+       }
+
+       .bg div h1 {
+        font-size: 3rem;
        }
     }
 
