@@ -46,6 +46,8 @@
         .card {
             flex-direction: column;
             gap: 2rem;
+            padding: 0;
+            margin: 2rem 0;
         }
 
         .card .title {

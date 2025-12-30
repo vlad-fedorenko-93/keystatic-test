@@ -76,7 +76,7 @@
 <style>
     h1 {
         font-weight: 900;
-        font-size: max(12vw, 4.5rem);
+        font-size: max(12vw, 3.5rem);
         line-height: 0.9;
         text-align: center;
         text-transform: uppercase;
