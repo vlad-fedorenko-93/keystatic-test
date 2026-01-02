@@ -41,7 +41,7 @@ export default config({
           label: 'Content',
           options: {
             image: {
-              directory: 'public/assets/images/posts',
+              directory: 'src/assets/images/posts',
               publicPath: '../../assets/images/posts/',
             },
           },
