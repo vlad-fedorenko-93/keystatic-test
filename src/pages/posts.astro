@@ -22,7 +22,7 @@ const posts = await getCollection("posts");
               posts.map((post) => (
                 <BlogPost title={post.data.title} slug={`/posts/${post.slug}`} description={post.data.description} date={post.data.date}>
                   <div class="thumbnail w-96 h-[100%] rounded overflow-hidden">
-                    <Image src={thumbnails[`../assets/thumbnails/posts/${post.slug}/thumbnail.avif`].default} alt={post.data.title} priority fit="cover" width={600}/>
+                    <Image src={thumbnails[`../assets/thumbnails/posts/${post.slug}/thumbnail.avif`].default} alt={post.data.title} priority fit="cover" width={810}/>
                   </div>
                 </BlogPost>
               ))  

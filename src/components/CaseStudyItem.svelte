@@ -7,12 +7,12 @@
     <div class="thumbnail mb-4">
         {@render children()}
     </div>
-    <div class="title-section mb-12">
+    <div class="title-section mb-6">
         {#if date}
             <DateFormater className="mb-0 text-[var(--color-base-content-muted)]" {date} />
         {/if}
         <h4 class="text-3xl font-bold">{title}</h4>
-        <p>{description}</p>
+        <p class="w-4/5">{description}</p>
     </div>
 </a>
 

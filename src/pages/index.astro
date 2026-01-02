@@ -84,11 +84,9 @@ const postThumbnails = import.meta.glob<{ default: ImageMetadata }>(
               date={post.data.date}
             >
               <Image
-                src={
-                  postThumbnails[
+                src={postThumbnails[
                     `../assets/thumbnails/posts/${post.slug}/thumbnail.avif`
-                  ]?.default
-                }
+                  ]?.default}
                 alt={post.data.title}
               />
             </CaseStudyItem>

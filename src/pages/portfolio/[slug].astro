@@ -65,7 +65,7 @@ const { Content } = await caseStudy.render();
                     <h1 class="text text-6xl font-bold mb-4">
                         {caseStudy.data.title}
                     </h1>
-                    <p class="text-muted text-xl mb-8">
+                    <p class="text-muted w-3/4 text-xl mb-8">
                         {caseStudy.data.description}
                     </p>
                     <Button label="Live Demo" slug={caseStudy.data.demo} />
@@ -105,10 +105,10 @@ const { Content } = await caseStudy.render();
             priority
             fit="cover"
             width={2000}
-            height={1000}
+            height={1125}
         />
         {/* Content */}
-        <article class="m-auto py-40 w-3/5">
+        <article class="m-auto py-32 w-4/5">
             <Content />
         </article>
         {/* Navigation */}
