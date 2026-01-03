@@ -8,6 +8,9 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://astro.build/config
 export default defineConfig({
+  optimizeDeps: {
+    exclude: ['@keystatic/astro'],
+  },
   output: 'static',
   site: 'https://vlad-fedorenko-93.github.io',
   build: {

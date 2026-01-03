@@ -63,12 +63,24 @@ article a {
    text-decoration: underline;
 }
 
-article code {
-   background-color: var(--color-base-300);
+article code, 
+article pre {
    color: var(--color-primary);
-   padding: 0.2rem 0.4rem;
-   font-size: 1rem;
+   font-size: 1.2rem;
    border-radius: 6px;
+}
+
+article code {
+   padding: 0.2rem 0.4rem;
+   background-color: var(--color-base-300);
+}
+
+article pre {
+   padding: 1rem;
+}
+
+article pre code {
+   background-color: transparent;
 }
 
 article hr {
@@ -82,7 +94,7 @@ article p {
 }
 
 article p img {
-   width: fit-content;
+   width: inherit;
 }
 
 @media (max-width: 900px) {
