@@ -1,34 +1,182 @@
 ---
-title: 'CSS trick: Highlight hovered element and dim others'
+title: 'CSS Hover Effect: Dim Other List Items Except the Hovered One'
 thumbnail: >-
   ../../thumbnails/posts/css-trick-highlight-hovered-element-and-dim-others/thumbnail.avif
 tags:
   - CSS
   - Hover state
-date: 2025-12-07
+date: 2025-12-06
 description: >-
-  A well-organized naming system in Figma makes it easier for teams to locate
-  and use components, variants, and styles effectively. Below is a guide to
-  creating a clear and consistent naming convention for your design system.
+  A clean CSS technique for guiding user attention by dimming non-hovered
+  elements.
 ---
+## Introduction
+
+In this article, you’ll learn how to create a **CSS hover effect that dims all other list items except the one being hovered**.\
+This technique uses the **CSS `:not()` pseudo-class** and works with **pure CSS — no JavaScript required**.
+
+This pattern is especially useful for navigation menus, lists, and UI elements where you want to focus the user’s attention on a single item.
+
+You can see the final result in [this CodePen](https://codepen.io/afafaffeeeff/pen/jEqLRLp).
+
+\
+\
 ![](../../assets/images/posts/css-trick-highlight-hovered-element-and-dim-others/hover-effect-demo.gif)
 
-`code in the line`
+---
 
-```js
-// https://astro.build/config
-export default defineConfig({
-  optimizeDeps: {
-    exclude: ['@keystatic/astro'],
-  },
-  output: 'static',
-  site: 'https://vlad-fedorenko-93.github.io',
-  build: {
-    format: 'file',
-  },
-  integrations: [react(), markdoc(), svelte(), process.env.NODE_ENV !== 'production' ? keystatic() : []].flat(),
-  vite: {
-    plugins: [tailwindcss()],
-  },
-});
+## The Problem
+
+CSS makes it easy to style an element when it’s hovered. However, **dimming all sibling elements except the hovered one** is not as straightforward and is often solved with JavaScript.
+
+The goal is to achieve this behavior:
+
+- Hover one item
+- Dim all other items
+- Restore everything when the hover ends
+
+We’ll solve this using only CSS.
+
+---
+
+## HTML & CSS Setup
+
+First, let’s prepare our HTML:
+
+```html
+<div class="container">
+  <a class="item-link">🍏 Apple</a>
+  <a class="item-link">🍌 Banana</a>
+  <a class="item-link">🦆 Duck</a>
+  <a class="item-link">🥒 Cucumber</a>
+</div>
+
 ```
+
+Now add some basic styling for the list:
+
+```css
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.item-link {
+  display: inline-block;
+  opacity: 1;
+  font-size: 4rem;
+}
+
+```
+
+At this point, we have a simple vertical list with no hover effects applied.
+
+---
+
+## Understanding the CSS `:not()` Pseudo-class
+
+According to [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:not):
+
+> The **`:not()`** CSS pseudo-class represents elements that do not match a list of selectors. Since it prevents specific items from being selected, it is known as the *negation pseudo-class*.
+
+In simple terms, **`:not()` means “select everything except this.”**
+
+### Basic example
+
+```css
+/* 
+  Select all button elements except those with the class .primary
+*/
+button:not(.primary) {
+  opacity: 0.6;
+}
+```
+
+This selector targets every `button` that does *not* have the `.primary` class.
+
+---
+
+## Using `:not()` for a Hover Effect
+
+The powerful thing about **`:not()`** is that it can exclude not only classes, but also other pseudo-classes such as **`:hover`**, **`:active`**, and **`:focus`**.
+
+Let’s try applying it to our list items:
+
+```css
+.item-link:not(:hover) {
+  opacity: 0.2;
+  transition: 0.3s ease;
+}
+
+```
+
+### Why this isn’t enough
+
+If you try this, all list items will be dimmed **unless they are hovered**.\
+This effect works, but it’s not what we want — it could be achieved with a simple `:hover` rule.
+
+Our goal is different:
+
+- Items should dim **only when one of them is hovered**
+- When nothing is hovered, everything should stay visible
+
+---
+
+## Fixing the Hover Behavior
+
+To fix this, we need to make the effect conditional on the **parent container being hovered**.
+
+```css
+.container:hover .item-link:not(:hover) {
+  opacity: 0.2;
+  transition: 0.3s ease;
+}
+
+```
+
+Now the logic becomes:
+
+- When the container is hovered
+- Dim all items **except** the one currently hovered
+
+This gets us very close to the desired result.
+
+---
+
+## Preventing the Container Hover Issue
+
+There’s one remaining problem.
+
+When the cursor enters the **`.container`** but is not hovering a specific item, all items still become dimmed. This happens because the container itself is hovered.
+
+To fix this, we can make the container ignore pointer events:
+
+```css
+.container {
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+```
+
+Each `.item-link` still receives hover events, but the container itself no longer does — exactly what we need.
+
+---
+
+## When Should You Use This Technique?
+
+This CSS hover pattern works especially well for:
+
+- Navigation menus
+- Feature lists
+- Card-based layouts
+- Image or content galleries
+
+It’s ideal when you want to **guide user attention** without adding JavaScript or complex logic.

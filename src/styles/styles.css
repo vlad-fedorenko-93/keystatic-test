@@ -66,9 +66,96 @@ li,
 a,
 span {
    font-family: "Clash Grotesk";
+   letter-spacing: 0.05rem;
 }
 
-pre code span, code {
+pre code span,
+code {
    font-family: "RX100";
    letter-spacing: 0.02em;
+}
+
+pre:has(code) {
+   position: relative;
+   padding-top: 3rem !important;
+   margin: 2rem 0;
+}
+
+pre[data-language]::before {
+   content: attr(data-language);
+   position: absolute;
+   top: 12px;
+   left: 16px;
+   font-size: 1rem;
+   font-family: "RX100", monospace;
+   font-weight: 600;
+   text-transform: uppercase;
+   letter-spacing: 0.1em;
+   color: white;
+   opacity: 0.4;
+   pointer-events: none;
+}
+
+pre button.copy {
+   position: absolute;
+   right: 12px;
+   top: 12px;
+   height: 32px;
+   width: 32px;
+   padding: 6px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: rgba(255, 255, 255, 0.05);
+   backdrop-filter: blur(8px);
+   -webkit-backdrop-filter: blur(8px);
+   border: 1px solid rgba(255, 255, 255, 0.1);
+   border-radius: 8px;
+   cursor: pointer;
+   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+   & span {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      transition: transform 0.2s ease;
+   }
+
+   & .ready {
+      background-image: url(/icons/copy.svg);
+   }
+
+   & .success {
+      display: none;
+      background-image: url(/icons/copy-success.svg);
+   }
+
+   &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+   }
+
+   &:active {
+      transform: translateY(0);
+   }
+
+   &.copied {
+      & .success {
+         display: block;
+      }
+
+      & .ready {
+         display: none;
+      }
+   }
+}
+
+/* Specificity to override transformer default visibility if needed */
+pre:hover button.copy {
+   opacity: 1 !important;
 }

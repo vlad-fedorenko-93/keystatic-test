@@ -1,5 +1,7 @@
 import { defineMarkdocConfig } from '@astrojs/markdoc/config';
 import shiki from '@astrojs/markdoc/shiki';
+import { addCopyButton } from 'shiki-transformer-copy-button'
+
 
 export default defineMarkdocConfig({
   extends: [
@@ -15,6 +17,10 @@ export default defineMarkdocConfig({
       // Note: Shiki has countless langs built-in, including `.astro`!
       // https://shiki.style/languages
       langs: [],
+      transformers: [addCopyButton({
+        visibility: 'hover',
+        feedbackDuration: 3000
+      })]
     }),
   ],
 });

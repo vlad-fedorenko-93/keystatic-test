@@ -9,7 +9,10 @@
     </div>
     <div class="title-section mb-6">
         {#if date}
-            <DateFormater className="mb-0 text-[var(--color-base-content-muted)]" {date} />
+            <DateFormater
+                className="mb-0 text-[var(--color-base-content-muted)]"
+                {date}
+            />
         {/if}
         <h4 class="text-3xl font-bold">{title}</h4>
         <p class="w-4/5">{description}</p>
@@ -23,10 +26,22 @@
 
     h4 {
         color: var(--color-base-content);
+        width: 95%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 
     p {
         color: var(--color-base-content-muted);
+        width: 95%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Number of lines to show */
+        -webkit-box-orient: vertical;
     }
 
     .card:hover {

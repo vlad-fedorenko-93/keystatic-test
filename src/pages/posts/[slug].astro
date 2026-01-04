@@ -67,13 +67,15 @@ const thumbnail =
       <div class="content relative m-auto w-3/4 flex flex-col py-48">
         <a class="back absolute top-6 text-md" href="/posts">Back to blog</a>
         <DateFormater
-          className="mb-8 text-[var(--color-base-content-muted)]"
+          className="text-[var(--color-base-content-muted)]"
           date={post.data.date}
         />
-        <h1 class="text-6xl font-bold mb-8 text">{post.data.title}</h1>
+        <h1 class="text-6xl font-bold mt-8 mb-4 text">{post.data.title}</h1>
+        <p class="text-lg w-3/4 mb-4 text-[var(--color-base-content-muted)]">{post.data.description}</p>
         <div class="flex gap-2">
           {post.data.tags?.map((tag) => <Tag tag={tag} />)}
         </div>
+        
       </div>
     </section>
     {/* Thumbnail */}
@@ -86,7 +88,7 @@ const thumbnail =
       height={1000}
     />
     {/* Content */}
-    <article class="m-auto p-40 w-3/4">
+    <article class="m-auto pt-40 pb-8 w-3/5">
       <Content />
     </article>
     {/* Navigation */}
@@ -129,12 +131,17 @@ const thumbnail =
 
   @media (max-width: 900px) {
         .content {
-            padding: 4rem 0;
+            padding: 5rem 0;
             width: 90%;
         }
 
         .content h1 {
             font-size: 2.5rem;
+            margin-top: 1rem;
+        }
+
+        .content p {
+          width: 90%;
         }
 
         article {
