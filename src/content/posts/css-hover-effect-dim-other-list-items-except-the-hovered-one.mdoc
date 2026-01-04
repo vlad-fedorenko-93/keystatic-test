@@ -5,6 +5,7 @@ thumbnail: >-
 tags:
   - CSS
   - Hover state
+  - UI
 date: 2025-12-06
 description: >-
   A clean CSS technique for guiding user attention by dimming non-hovered
@@ -87,9 +88,8 @@ In simple terms, **`:not()` means “select everything except this.”**
 ### Basic example
 
 ```css
-/* 
-  Select all button elements except those with the class .primary
-*/
+/* Select all button elements except those with the class .primary */
+
 button:not(.primary) {
   opacity: 0.6;
 }
@@ -110,7 +110,6 @@ Let’s try applying it to our list items:
   opacity: 0.2;
   transition: 0.3s ease;
 }
-
 ```
 
 ### Why this isn’t enough
@@ -134,7 +133,6 @@ To fix this, we need to make the effect conditional on the **parent container be
   opacity: 0.2;
   transition: 0.3s ease;
 }
-
 ```
 
 Now the logic becomes:
@@ -156,14 +154,13 @@ To fix this, we can make the container ignore pointer events:
 
 ```css
 .container {
-  pointer-events: none;
+  pointer-events: none; /* ignore pointer evets */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
-
 ```
 
 Each `.item-link` still receives hover events, but the container itself no longer does — exactly what we need.
